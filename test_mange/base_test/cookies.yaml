@@ -1,0 +1,16 @@
+- domain: .channels.weixin.qq.com
+  expiry: 1732154448
+  httpOnly: true
+  name: _finder_fake_uin
+  path: /
+  sameSite: Lax
+  secure: true
+  value: xnyK1WtQtKgZjKB%2FoXld%2B3JmAaVB3T2H3gcLnTL0pNpcLnq6gydOci14jrOl2O%2FaRsyqWTVCpXlz3cpC3KjLGA%2FOEqTAA6fTre67p2Ng%2B0u9t2x%2FUwZj%2BU8enc5dVn4dw5Arwn6f
+- domain: channels.weixin.qq.com
+  expiry: 1732154448
+  httpOnly: true
+  name: _finder_fake_uin
+  path: /
+  sameSite: Lax
+  secure: false
+  value: xnyK1WtQtKgZjKB%2FoXld%2B3JmAaVB3T2H3gcLnTL0pNpcLnq6gydOci14jrOl2O%2FaRsyqWTVCpXlz3cpC3KjLGA%2FOEqTAA6fTre67p2Ng%2B0u9t2x%2FUwZj%2BU8enc5dVn4dw5Arwn6f
