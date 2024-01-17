@@ -1,7 +1,6 @@
 import os.path
-
 import yaml
-from config.configInfo import ConfigInfo
+from config.setting import ConfigInfo
 # 读取yaml文件内容
 def get_yaml_file_content(file_path=None) -> list:
     if file_path is None:
