@@ -66,4 +66,4 @@ class ReadFile:
 
 
 if __name__ == "__main__":
-    ReadFile().read_excel(r"C:\Users\李如意\Desktop\茹月工作文档\广东远成金属股份有限公司_2023年11月_综合所得申报.xlsx")
+    ReadFile().read_excel(r"xxxxx.xlsx")
