@@ -3,7 +3,7 @@ author：li ru yi
 desc: yyw.com main page
 """
 
-from common.play_wright.sync_playwright_base import SyncPlayWrightWrapper
+from common.playwright.sync_playwright_base import SyncPlayWrightWrapper
 
 
 class main_page_element(SyncPlayWrightWrapper):
