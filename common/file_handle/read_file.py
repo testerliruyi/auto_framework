@@ -12,8 +12,8 @@ class ReadFile:
     @staticmethod
     def read_txt_file(filename) -> list[str]:
         with open(filename, 'r', encoding='utf-8') as file:
-            list = file.readlines()
-        return list
+            content_list = file.readlines()
+        return content_list
 
     # 读取配置文件
     @staticmethod
@@ -40,6 +40,18 @@ class ReadFile:
                 return info
             else:
                 return data
+
+    # 写入yaml文件
+    @staticmethod
+    def write_yaml(file_name, content):
+        with open(file_name, mode='w', encoding='utf-8') as file:
+            yaml.dump(data=content, stream=file, allow_unicode=True)
+
+    # 清空yaml文件内容
+    @staticmethod
+    def clearYaml(filename):
+        with open(filename, mode='w', encoding='utf-8') as file:
+            file.truncate()
 
     # 读取excel文件内容
     @staticmethod
