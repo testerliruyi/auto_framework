@@ -7,7 +7,8 @@ class Params:
     now_date = datetime.now()
 
     # 日期格式化函数
-    def date_formatter(self, datetime_obj: datetime = now_date, formatter: str = "%Y%m%d%H%M%S") -> str:
+    @staticmethod
+    def date_formatter(datetime_obj: datetime, formatter: str = "%Y%m%d%H%M%S") -> str:
         """
         :param datetime_obj: 日期对象 ，默认为当天日期。
         :param formatter:  需要转换的日期格式，"%Y%m%d%H%M%S"，"%Y-%m-%d %H:%M:%S"
@@ -17,7 +18,7 @@ class Params:
         return formatted_date
 
     def get_now_date(self):
-        date_time = self.date_formatter()
+        date_time = self.date_formatter(self.now_date)
         date = self.date_formatter(self.now_date, "%Y%m%d")
         year = self.date_formatter(self.now_date, "%Y")
         month = self.date_formatter(self.now_date, "%m")
@@ -34,4 +35,4 @@ class Params:
 
 
 if __name__ == "__main__":
-    print(Params().common_param())
+    print(Params().get_now_date())

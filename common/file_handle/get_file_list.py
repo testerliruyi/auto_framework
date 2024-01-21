@@ -1,11 +1,6 @@
 import pathlib
-from config.configInfo import ConfigInfo
 
-
-def get_files(path=None) -> list or bool:
-    if path is None:
-        path = ConfigInfo.videoPath
-
+def get_files(path) -> list or bool:
     if pathlib.Path(path).exists():
         pathinfo = pathlib.Path(path).iterdir()
         paths = list(pathinfo)
@@ -18,5 +13,4 @@ def get_files(path=None) -> list or bool:
 
 
 if __name__ == '__main__':
-    for i in get_files(ConfigInfo.videoPath):
-        print(i)
+    pass

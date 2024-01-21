@@ -31,7 +31,7 @@ class ConfigInfo:
     DATABASE_INFO_FILE = os.path.join(BASE_DIR, "config/database_info.yaml")
 
     # 日志保存文件路径
-    LOG_FILE_PATH = os.path.join(BASE_DIR, f"log\\test_{Params.date_formatter(formatter='%Y%m%d')}.log")
+    LOG_FILE_PATH = os.path.join(BASE_DIR, f"log\\test_{Params.date_formatter(Params().now_date, formatter='%Y%m%d')}.log")
 
     # 视频存放路径
     videoPath = "E:\视频目录\YYW.AI-1.18"
@@ -39,8 +39,16 @@ class ConfigInfo:
     # 循环次数
     loop_count = 5
 
+    real_time_update_test_cases = False
+
+    # 系统分隔符
+    os_sep = os.sep
+
     # ffmpeg 安装地址
     ffmpeg_DIR = r"D:\ffmpeg-6.1.1\bin"
+
+
+
 
 
 
