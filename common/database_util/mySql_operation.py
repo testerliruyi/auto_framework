@@ -47,7 +47,12 @@ class MySQLConnection:
     # 执行插入操作
     def execute_insert(self, sql, *args):
         if args:
-            pass
+            arguments = args[0]
+            try:
+                self.cursor.executemany(sql, arguments)
+                self.__conn.commit()
+            except pymysql.Error as err:
+                print(f"语句：{sql} 执行出错，错误信息如下:{err}")
         else:
             try:
                 self.cursor.execute(sql)
