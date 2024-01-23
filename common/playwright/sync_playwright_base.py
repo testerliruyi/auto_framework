@@ -9,8 +9,8 @@ class SyncPlayWrightWrapper:
         self.browser = None
         self.expect = expect
         # 设置全局expect超时时间为30sec
-        self.expect.set_options(timeout=30000)
-        if not param:
+        self.expect.set_options(timeout=60000)
+        if param is None:
             print("current mode is: default")
             self.page = self.__lunch_default_browser()
         elif param.lower() == "design":
@@ -19,8 +19,7 @@ class SyncPlayWrightWrapper:
         elif param.lower() == "local":
             print("current mode is: local")
             self.page = self.__lunch_local_browser()
-        else:
-            self.page = self.__lunch_default_browser()
+
 
     # 默认方法启动浏览器
     def __lunch_default_browser(self):
@@ -39,8 +38,8 @@ class SyncPlayWrightWrapper:
         if self.browser_type == "chromium":
             self.browser = self.playWright.chromium.connect_over_cdp("http://localhost:9222")
 
-        context = self.browser.contexts[0]
-        self.page = context.pages[0]
+        self.context = self.browser.contexts[0]
+        self.page = self.context.pages[0]
         return self.page
 
     # 指定本机已安装浏览器
@@ -105,6 +104,10 @@ class SyncPlayWrightWrapper:
     def input_text(self, selector, text: str):
         self.get_locator(selector).fill(text)
 
+    # 查询元素
+    def query_element(self, selector):
+        element = self.page.query_selector(selector)
+        return element
     # 上传文件
     def upload_file(self, selector, path: str):
         self.get_locator(selector).set_input_files(path)
@@ -123,6 +126,10 @@ class SyncPlayWrightWrapper:
     # 截图并保存
     def save_screenshot(self, path):
         self.page.screenshot(path=path, full_page=True)
+
+    #切换到最新标签
+    def get_all_pages(self):
+        return self.context.pages
 
 if __name__ == "__main__":
     pass

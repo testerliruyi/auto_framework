@@ -1,8 +1,8 @@
-'''
+"""
 desc：mysql常用功能封装
 author:liruyi
 date:2023/10/10
-'''
+"""
 import pymysql.cursors
 
 

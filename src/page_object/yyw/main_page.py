@@ -2,6 +2,7 @@
 author：li ru yi
 desc: yyw.com main page
 """
+import time
 
 from common.playwright.sync_playwright_base import SyncPlayWrightWrapper
 
@@ -19,6 +20,7 @@ class main_page_element(SyncPlayWrightWrapper):
         login_info = self.query_element("css=span.color:nth-last-child(2)")
         if login_info:
             login_info.click()
+            self.page.wait_for_selector("#txtUserName", state="visible", timeout=60000)
             self.get_locator("#txtUserName").fill("liruyi0229@outlook.com")
             self.get_locator("//input[@id='txtPassword']").type('111111')
             self.get_locator("//button[@id='Login']").click()
@@ -36,6 +38,26 @@ class main_page_element(SyncPlayWrightWrapper):
         self.click_element('//input[@type="submit"]')
         resource = self.page.content()
         print(resource)
+
+    def enter_goodsinfo_and_add_cart(self):
+        self.expect(self.get_locator("css=div.resultpro"))
+        self.get_locator("css=div.resultpro img").nth(1).click()
+        time.sleep(1)
+        # 切换到最新页面
+        page = self.get_all_pages()[-1]
+        print("current page is:",page)
+        # print(self.get_all_pages()[-1].content())
+        self.expect(page.locator("xpath=//a[text()='Add to Cart']"))
+        page.locator("xpath=//a[text()='Add to Cart']").click()
+        page.locator("xpath=//span[contains(text(), 'Cart')]").click()
+        self.query_element("img[alt = 'Check Out']")
+        page.locator("img[alt = 'Check Out']").click()
+
+
+        # self.get_locator("xpath=//a[text()='Add to Cart']").click()
+
+
+
 
 
 

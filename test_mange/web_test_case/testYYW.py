@@ -1,23 +1,18 @@
-import time
-from common.selenium import DebugWebdriver
-# 导入键盘操作关键字
-from selenium.webdriver.common.keys import Keys
+from src.page_object.yyw.main_page import main_page_element
 
+init_page = main_page_element()
 
-class TestWeb(DebugWebdriver):
-    def __init__(self):
-        super().__init__()
-        self.url = 'https://www.yyw.com/'
-        # self.driver.implicitly_wait(15)
+class TestYYW:
 
-    def runtest(self) -> None:
-        self.driver.get(self.url)
-        self.locate_element('xpath', '//*[@id="Login_S"]/li[1]/a/span[1]').click()
-        self.locate_element('xpath', "//input[@id='txtUserName']").send_keys(Keys.CLEAR)
-        self.locate_element('xpath', "//input[@id='txtUserName']").send_keys('18588512607@163.com')
-        self.locate_element('xpath', "//*[@id='form1']/input[@type='password']").send_keys('111111')
-        self.locate_element('xpath', "//button[@id='Login']").click()
+    # def setup_class(self):
+    #     init_page.goto_url("https://www.yyw.com")
 
-if __name__ == '__main__':
-    cls = TestWeb()
-    cls.runtest()
+    # def test_login(self):
+    #     init_page.login()
+    #
+    # def test_search(self):
+    #     init_page.search()
+
+    def test_add_cart(self):
+        init_page.enter_goodsinfo_and_add_cart()
+
