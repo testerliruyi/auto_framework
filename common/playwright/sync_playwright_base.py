@@ -119,7 +119,10 @@ class SyncPlayWrightWrapper:
                            state: Optional[Literal["attached", "detached", "hidden", "visible"]] = "visible",
                            timeout=10000):
         self.page.wait_for_selector(selector, state=state, timeout=timeout)
-
+    
+    # 截图并保存
+    def save_screenshot(self, path):
+        self.page.screenshot(path=path, full_page=True)
 
 if __name__ == "__main__":
     pass
