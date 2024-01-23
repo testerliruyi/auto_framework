@@ -14,11 +14,28 @@ class main_page_element(SyncPlayWrightWrapper):
     def go_url(self):
         self.goto_url("https://www.yyw.com")
 
-    def search_input(self):
-        self.input_text('//input[@name="keywords"]', 'beads')
+    def login(self):
+        self.page.wait_for_selector("css=span.color:nth-last-child(2)", state="visible", timeout=60000)
+        login_info = self.query_element("css=span.color:nth-last-child(2)")
+        if login_info:
+            login_info.click()
+            self.get_locator("#txtUserName").fill("liruyi0229@outlook.com")
+            self.get_locator("//input[@id='txtPassword']").type('111111')
+            self.get_locator("//button[@id='Login']").click()
+            try:
+                self.expect(self.get_locator("css=span.red")).to_be_visible()
+                assert True
+            except TimeoutError as e:
+                assert False
+        else:
+            print("页面元素定位失败")
+            assert False
 
-    def click_button(self):
+    def search(self):
+        self.input_text('//input[@name="keywords"]', 'beads')
         self.click_element('//input[@type="submit"]')
+        resource = self.page.content()
+        print(resource)
 
 
 
