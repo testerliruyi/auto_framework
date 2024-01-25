@@ -39,22 +39,48 @@ class main_page_element(SyncPlayWrightWrapper):
         resource = self.page.content()
         print(resource)
 
-    def enter_goodsinfo_and_add_cart(self):
+     # 进入商品详情并添加购物车
+    def add_cart(self):
         self.expect(self.get_locator("css=div.resultpro"))
-        self.get_locator("css=div.resultpro img").nth(1).click()
-        time.sleep(1)
+        self.get_locator("css=div.resultpro img").nth(2).click()
         # 切换到最新页面
-        page = self.get_all_pages()[-1]
-        print("current page is:",page)
+        self.page = self.get_all_pages()[-1]
+        print("current page is:", self.page)
         # print(self.get_all_pages()[-1].content())
-        self.expect(page.locator("xpath=//a[text()='Add to Cart']"))
-        page.locator("xpath=//a[text()='Add to Cart']").click()
-        page.locator("xpath=//span[contains(text(), 'Cart')]").click()
-        self.query_element("img[alt = 'Check Out']")
-        page.locator("img[alt = 'Check Out']").click()
+        self.expect(self.page.locator("xpath=//a[text()='Add to Cart']")).to_be_visible()
+        if self.query_element("xpath=//a[text()='Add to Cart']"):
+            print("定位添加购物车按钮成功")
+            self.page.locator("xpath=//a[text()='Add to Cart']").is_enabled(timeout=10000)
+            self.page.locator("xpath=//a[text()='Add to Cart']").click()
+            self.page.locator("xpath=//span[contains(text(), 'Cart')]").click()
 
+    def check_out(self):
+        self.page.query_selector("css=img[alt = 'Check Out']")
+        self.page.locator("img[alt = 'Check Out']").click()
+        # 待结算页面元素出现后进行截图
+        self.expect(self.page.locator("css=.c0f6:nth-child(1)").first).to_be_visible()
+        # 等待页面加载完成后 进行截图
+        self.page.wait_for_load_state("load")
+        self.save_screenshot("check_out.png")
 
-        # self.get_locator("xpath=//a[text()='Add to Cart']").click()
+    def submit_order(self):
+        print("current page : ", self.page.frames)
+        for i in self.page.frames:
+            # iframe = self.page.frame_locator("iframe[name=\"\"]")
+            try:
+                i.get_by_role("link", name="PayPal").click()
+                print("定位成功,", i)
+            except Exception as e:
+                print("定位失败")
+                continue
+        # iframe.get_by_role("link", name="PayPal").click()
+        # self.page = self.get_all_pages()[-1]
+
+        # key_words = "PayPal"
+        # if key_words in self.page.title():
+        #     self.save_screenshot("paypal_window")
+        #     assert True
+
 
 
 
