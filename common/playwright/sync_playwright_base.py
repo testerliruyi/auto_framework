@@ -122,14 +122,37 @@ class SyncPlayWrightWrapper:
                            state: Optional[Literal["attached", "detached", "hidden", "visible"]] = "visible",
                            timeout=10000):
         self.page.wait_for_selector(selector, state=state, timeout=timeout)
+        
+    # 浏览器存在打开新标签时，使用此方法等待新页面出现
+    def wait_for_new_page(self):
+        new_page = self.context.wait_for_event("page")
+        return new_page
     
+    # 获取浏览器上下文所有页面标签
+    def get_all_pages(self):
+        self.wait_for_new_page()
+        all_pages = self.context.pages
+        return all_pages
+
     # 截图并保存
-    def save_screenshot(self, path):
-        self.page.screenshot(path=path, full_page=True)
+    def save_screenshot(self, file_name: str, path: str = None):
+        """
+        :param path:  图片保存目录
+        :param file_name: 图片文件名
+        :return:
+        """
+        if path:
+            path = os.path.join(path, file_name)
+            self.page.screenshot(path=path, full_page=True)
+        else:
+            path = os.path.join(ConfigInfo.SAVE_TEST_RESULT_PATH, file_name)
+            self.page.screenshot(path=path, full_page=True)
 
     #切换到最新标签
     def get_all_pages(self):
         return self.context.pages
+    
+
 
 if __name__ == "__main__":
     pass
