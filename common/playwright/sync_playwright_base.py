@@ -1,5 +1,8 @@
 from playwright.sync_api import sync_playwright, expect
 from typing import Union, Optional, Literal
+from config.setting import ConfigInfo
+import os
+
 
 
 class SyncPlayWrightWrapper:

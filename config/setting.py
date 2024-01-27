@@ -30,9 +30,14 @@ class ConfigInfo:
     # 数据库信息保存文件
     DATABASE_INFO_FILE = os.path.join(BASE_DIR, "config/database_info.yaml")
 
+    # 执行结果缓存目录
+    CASE_TMP_DIR = os.path.join(BASE_DIR,"tmp")
+
     # 日志保存文件路径
     LOG_FILE_PATH = os.path.join(BASE_DIR, f"log\\test_{Params.date_formatter(Params().now_date, formatter='%Y%m%d')}.log")
 
+    # 测试结果保存路径
+    SAVE_TEST_RESULT_PATH = os.path.join(BASE_DIR, "test_manage/test_report")
     # 视频存放路径
     videoPath = "E:\视频目录\YYW.AI-1.18"
 
