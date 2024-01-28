@@ -1,0 +1,6 @@
+test:
+  host: 'mysql.sqlpub.com'
+  port: 3306
+  user: 'liruyi'
+  password: '544dc8836263faa9'
+  database: 'ruyi_testdb'

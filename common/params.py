@@ -24,15 +24,18 @@ class Params:
         month = self.date_formatter(self.now_date, "%m")
         return date_time, date, year, month
 
-    def get_seqNo(self):
-        return self.get_now_date()[0]
-
-    def common_param(self) -> dict:
+    def common_param(self, count:int = 1, num: int=4) -> dict:
         dict_obj = {}
-        dict_obj['seqNo'] = self.get_seqNo()
+        dict_obj["datetime"] = self.get_now_date()[0]
         dict_obj["date"] = self.get_now_date()[1]
+        dict_obj["year"] = self.get_now_date()[2]
+        dict_obj["month"] = self.get_now_date()[3]
+        dict_obj['seqNo'] = self.get_now_date()[0] + str(count).zfill(num)
+        dict_obj["prod_id"] = "TN" + str(count).zfill(num)
+
+
+
         return dict_obj
 
-
 if __name__ == "__main__":
-    print(Params().get_now_date())
+    print(Params().common_param())
