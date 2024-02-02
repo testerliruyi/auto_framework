@@ -3,7 +3,7 @@ func: 用于yaml案例中，对指定依赖案例的参数进行替换。
 """
 
 import re
-from common.json_find import json_find
+from common.json_find import json_get_value
 
 def special_template_init(pattern, content:str, respone:dict):
     """
@@ -18,20 +18,20 @@ def special_template_init(pattern, content:str, respone:dict):
     if template_key:
         if pattern == r'\${DepRep\((\w+)\)}':
             for key in template_key:
-                if json_find(respone,key):
+                if json_get_value(respone,key):
                     try:
                         content=content.replace("${DepRep(%s)}" % key,
-                                                str(json_find(respone,key)))
+                                                str(json_get_value(respone,key)))
                     except Exception as err:
                         raise KeyError(f'{key}未拽索到，请排查下')
                 else:
                     pass
         elif pattern == r'\${DepReq\((\w+)\)}':
             for key in template_key:
-                if json_find(respone, key):
+                if json_get_value(respone, key):
                     try:
                         content = content.replace("${DepReq(%s)}" % key,
-                                                  str(json_find(respone,key)))
+                                                  str(json_get_value(respone,key)))
                     except Exception as err:
                         raise KeyError(f'{key}未拽索到，请排查下')
                 else:

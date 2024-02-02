@@ -8,7 +8,7 @@ from common.file_handle.read_file import ReadFile
 from config.setting import ConfigInfo
 
 
-def get_Case_Detail(case_file_name: str):
+def get_case_detail(case_file_name: str):
     """
     :param case_file_name:  yaml案例文件名称
     :return:

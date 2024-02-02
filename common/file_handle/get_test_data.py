@@ -7,7 +7,7 @@ from common.file_handle.read_file import ReadFile
 import os, typing
 
 
-def get_fileData(filename: typing.Union[str], path=None, selector=None):
+def get_test_data(filename: typing.Union[str], path=None, selector=None):
     """
     :param filename: 文件名
     :param path: none时来示从指定目录获取测试数据，非None时夹示获取指定陪径数播
@@ -16,11 +16,11 @@ def get_fileData(filename: typing.Union[str], path=None, selector=None):
     """
     if path is None:
         try:
-            if filename.endswith('yaml') == True:
+            if filename.endswith('yaml'):
                 file_path = ConfigInfo.TEST_DATA_PATH + os.sep + filename
                 data = ReadFile.read_yaml_file(file_path, ConfigInfo.ENV)
                 return data
-            elif filename.endswith('xlsx') == True:
+            elif filename.endswith('xlsx'):
                 file_path = ConfigInfo.TEST_DATA_PATH + os.sep + filename
                 data = ReadFile.read_excel(file_path, ConfigInfo.ENV)
                 return data
@@ -28,11 +28,11 @@ def get_fileData(filename: typing.Union[str], path=None, selector=None):
             raise FileNotFoundError("读取文件有误，请检查文件是否存在。", err)
     else:
         try:
-            if filename.endswith('yaml') == True:
+            if filename.endswith('yaml'):
                 file_path = path + os.sep + filename
                 data = ReadFile.read_yaml_file(file_path, selector=selector)
                 return data
-            elif filename.endswith("xlsx") == True:
+            elif filename.endswith("xlsx"):
                 file_path = ConfigInfo.TEST_DATA_PATH + os.sep + filename
                 data = ReadFile.read_excel(file_path, ws=selector)
                 return data

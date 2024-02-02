@@ -13,7 +13,7 @@ class ConfigInfo:
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
     # 配置环境
-    ENV = "YD02"
+    ENV = "test"
 
     # yaml文件测试案例保存目录
     TEST_CASE_FILE = os.path.join(BASE_DIR, "test_manage/test_case_file")
@@ -34,7 +34,10 @@ class ConfigInfo:
     CASE_TMP_DIR = os.path.join(BASE_DIR,"tmp")
 
     # 日志保存文件路径
-    LOG_FILE_PATH = os.path.join(BASE_DIR, f"log\\test_{Params.date_formatter(Params().now_date, formatter='%Y%m%d')}.log")
+    LOG_FILE_PATH = os.path.join(BASE_DIR, f"logs\/test_{Params.date_formatter(Params().now_date, formatter='%Y%m%d')}.log")
+
+    # 环境请求地址文件路径
+    ENV_FILE_PATH = os.path.join(BASE_DIR, f"config/envirment_info.yaml")
 
     # 测试结果保存路径
     SAVE_TEST_RESULT_PATH = os.path.join(BASE_DIR, "test_manage/test_report")

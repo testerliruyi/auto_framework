@@ -1,4 +1,4 @@
-from common_util import get_file_list, read_file_content
+from common.file_handle import get_file_list, read_file_content
 import re
 
 def content_handle():
