@@ -16,16 +16,16 @@ class ConfigInfo:
     ENV = "test"
 
     # yaml文件测试案例保存目录
-    TEST_CASE_FILE = os.path.join(BASE_DIR, "test_manage/test_case_file")
+    TEST_CASE_FILE = os.path.join(BASE_DIR, "test_manage\\api_test_case_file")
 
     # py测试可执行案例保存目录
-    TEST_CASE_PATH = os.path.join(BASE_DIR, "test_manage/api_test_case")
+    TEST_CASE_PATH = os.path.join(BASE_DIR, "test_manage\\api_test_case")
 
     # test_data文件目录
     TEST_DATA_PATH = os.path.join(BASE_DIR, "test_manage/test_data")
 
     # 不同环境测试使用链接配置文件
-    ENV_CONFIG_FILE = os.path.join(BASE_DIR, "config/env_config.ini")
+    ENV_CONFIG_FILE = os.path.join(BASE_DIR, "config/env_config.yaml")
 
     # 数据库信息保存文件
     DATABASE_INFO_FILE = os.path.join(BASE_DIR, "config/database_info.yaml")
@@ -36,11 +36,8 @@ class ConfigInfo:
     # 日志保存文件路径
     LOG_FILE_PATH = os.path.join(BASE_DIR, f"logs\/test_{Params.date_formatter(Params().now_date, formatter='%Y%m%d')}.log")
 
-    # 环境请求地址文件路径
-    ENV_FILE_PATH = os.path.join(BASE_DIR, f"config/envirment_info.yaml")
-
     # 测试结果保存路径
-    SAVE_TEST_RESULT_PATH = os.path.join(BASE_DIR, "test_manage/test_report")
+    SAVE_TEST_RESULT_PATH = os.path.join(BASE_DIR, "test_report")
     # 视频存放路径
     videoPath = "E:\视频目录\YYW.AI-1.18"
 
@@ -64,4 +61,4 @@ if __name__ == "__main__":
     # 获取文件列表
     # for i in get_files(ConfigInfo.videoPath):
     #     print(i)
-    print(ConfigInfo.LOG_FILE_PATH)
+    print(ConfigInfo.TEST_CASE_FILE)

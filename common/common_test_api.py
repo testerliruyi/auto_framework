@@ -108,8 +108,8 @@ class CommonTestApi:
                     logger.error(self.error_msg("测试数据"))
                     raise ValueError(self.error_msg("测试数据"))
 
-    # 获取依赖案例内容
-    def get_dependcase_content(self, case_name: str, field: str = None)-> str:
+    # 从数据库中获取案例的内容，包括请求信息和响应信息
+    def get_case_content(self, case_name: str, field: str = None)-> str:
         get_record_sql = """
         select * from public_flow where caseName =? order by create_time desc limit 1
         """
@@ -151,8 +151,8 @@ class CommonTestApi:
     # 处理案例详情中依赖案例的字段
     def depend_case_init(self, body, depend_case_name):
         try:
-            # 获取赖案例内容
-            depend_case_content = self.get_dependcase_content(depend_case_name)
+            # 获取依赖案例内容
+            depend_case_content = self.get_case_content(depend_case_name)
             # 处理案例中依赖案例请求报文，对需要获取依赖案例中值的字段进行参数化
             handle_req_result = special_template_init.special_template_init(ConfigInfo.DepReq_patt,
                                 json.dumps(body.get("data"), ensure_ascii=False), json.loads(depend_case_content["request"]))
@@ -172,7 +172,7 @@ class CommonTestApi:
             init_Param[k] = v
 
     def common_param_handle(self, body, test_data: dict = None):
-        logger.info(f"执行测试案例：{body['caseTitle']}")
+        logger.info(f"执行测试案例：{body['case_title']}")
         logger.info(f"当前测试环境为：{ConfigInfo.ENV}")  # 根据案例中组请求地址
         final_url = self.get_url(body)
         logger.info("请求地址：(}".format(final_url))
@@ -200,7 +200,7 @@ class CommonTestApi:
         headers = self._get_headers(body)
         # 获取请求报文床
         body_data = body.get("data")
-        logger.info(f"{body.get("caseTitle")}请求报文:\n" + json_formatter(body_data))
+        logger.info(f"{body.get('caseTitle')}请求报文:\n" + json_formatter(body_data))
         return final_url, headers, body_data
 
     # 通用请求接口

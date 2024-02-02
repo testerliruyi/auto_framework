@@ -38,7 +38,7 @@ dataInfo字段为需要从文件中读取数据批量执行案例时使用。
 \"""
 fh assertMethod_enum.py
 i case template.py×
-class Test {class_tile}:
+class Test{class_tile}:
 @allure.story("{allure_story}")
 #@pytest.mark.parametrize('dataInfo', get_fileData("creditCard.xlsx"))
 @pytest.mark.parametrize("body", get_Case_Detail("{yaml_file_name}"))

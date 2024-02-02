@@ -94,7 +94,7 @@ class TestCaseAutomaticGeneration:
         :return:
         """
         try:
-            return case_data['case_common']['allurestory']
+            return case_data['case_common']['allureStory']
         except KeyError:
             raise KeyError(cls.error_message(
                 param_name="allureStory",

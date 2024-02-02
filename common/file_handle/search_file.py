@@ -5,7 +5,7 @@ func:获取目录下相应的文件，并返回路径
 import os
 
 
-def search_file(path, filename=None):
+def search_file(path, filename=None) -> list or str:
     file_path = []
     if os.path.isdir(path):
         for root, dirs, files in os.walk(path, topdown=True):
@@ -25,4 +25,6 @@ def search_file(path, filename=None):
 
 
 if __name__ == "__main__":
-    print(search_file(r"E:\视频目录", "1.19AI真人换脸1.mp4"))
+    from config.setting import ConfigInfo
+    print(ConfigInfo.TEST_CASE_FILE)
+    print(search_file(ConfigInfo.TEST_CASE_FILE))

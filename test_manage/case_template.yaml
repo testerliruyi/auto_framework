@@ -1,0 +1,29 @@
+-
+  # 案例公共信息
+  case_common:
+    allureStory: ""
+  #案例名称
+  case_title: ""
+  # 请求方法【暂只支持get\post】
+  method: post
+  # 基本请求地址
+  request_url:
+  # url中扩展部分，可为空
+  url_ext:
+  # 测试数据【文件对象存放在test_manage\test_data中,通过yaml文件保存数据】
+  test_data: datainfo.card1
+  # 依赖案例
+  depend_case:
+  # 请求报文头
+  headers:
+    content-type: "json"
+  # 请求报文体
+  data:
+
+
+  # 断言
+  assert:
+    retCode:
+      Type: ==
+      value:
+      AssertType:

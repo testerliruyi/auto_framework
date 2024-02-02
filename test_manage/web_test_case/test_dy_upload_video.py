@@ -1,12 +1,12 @@
 import time
-from Src.page_object.DY.main_page import MainPage
-from common.file_handle.file_content_handle import content_handle
+from src.page_object.DY.main_page import MainPage
+from common.file_handle.read_file_content import get_yaml_file_content
 import pytest
 
 driver = MainPage()
 
 
-@pytest.mark.parametrize("info", content_handle())
+@pytest.mark.parametrize("info", get_yaml_file_content())
 class TestDyVideoPublic:
 
     # def setup_class(self):
