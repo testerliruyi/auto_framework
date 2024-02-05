@@ -1,2 +1,6 @@
-card1:
-  cardNo: "123456"
+# 环境
+test:
+  card1:
+    cardNo: "123456"
+  card2:
+    cardNo: "456789"
