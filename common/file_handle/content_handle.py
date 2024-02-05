@@ -1,8 +1,10 @@
 from common.file_handle import get_file_list, read_file_content
+from config.setting import ConfigInfo
 import re
 
+
 def content_handle():
-    file_list = get_file_list.get_files()
+    file_list = get_file_list.get_files(ConfigInfo.videoPath)
     file_content = read_file_content.get_yaml_file_content()
     for x in range(0, len(file_content)):
         file_content[x]['path'] = str(file_list[x])
