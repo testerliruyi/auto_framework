@@ -138,7 +138,7 @@ class CommonTestApi:
                 now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%5")
                 # 组共执行成功后sql语句
                 insert_sql = """
-                insert into public_flow("caseMame", "case_desc", "request", "reponse", "result", "create_time")
+                insert into public_flow("case_name", "case_desc", "request", "response", "status", "create_time")
                 values(?, ?, ?, ?, ?,?)
                 """
                 # 请求结果落库

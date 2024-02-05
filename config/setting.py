@@ -22,13 +22,16 @@ class ConfigInfo:
     TEST_CASE_PATH = os.path.join(BASE_DIR, "test_manage\\api_test_case")
 
     # test_data文件目录
-    TEST_DATA_PATH = os.path.join(BASE_DIR, "test_manage/test_data")
+    TEST_DATA_PATH = os.path.join(BASE_DIR, "test_manage\\test_data")
 
     # 不同环境测试使用链接配置文件
-    ENV_CONFIG_FILE = os.path.join(BASE_DIR, "config/env_config.yaml")
+    ENV_CONFIG_FILE = os.path.join(BASE_DIR, "config\\env_config.yaml")
 
     # 数据库信息保存文件
-    DATABASE_INFO_FILE = os.path.join(BASE_DIR, "config/database_info.yaml")
+    DATABASE_INFO_FILE = os.path.join(BASE_DIR, "config\\database_info.yaml")
+
+    # 数据库
+    DATABASE_SQLITE = os.path.join(BASE_DIR, "config\\autotest.sqlite")
 
     # 执行结果缓存目录
     CASE_TMP_DIR = os.path.join(BASE_DIR,"tmp")

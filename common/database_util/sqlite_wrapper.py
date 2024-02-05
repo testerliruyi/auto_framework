@@ -9,9 +9,10 @@ def dict_factory(cursor, row):
 
 
 class SqliteOpera:
-    def __init__(self):
+    def __init__(self, sqlite_path):
         try:
-            self.conn = sqlite3.connect('../util_scripts/myTest.sqlite')
+            self.sqlite_path = sqlite_path
+            self.conn = sqlite3.connect(self.sqlite_path)
 
         except Exception as err:
             print("数据库连接有误", err)
@@ -62,11 +63,11 @@ age int not null
     create_sql = """
     create table if not exists 'public_flow'
     ('id' integer primary key AUTOINCREMENT, 
-    'caseName' varchar(100) not null,
+    'case_name' varchar(100) not null,
     'case_desc' varchar(100) default null,
     'request' varchar(2000) not null,
-    'reponse' varchar(2000) not null,
-    'result' varchar(4),
+    'response' varchar(2000) not null,
+    'status' varchar(4),
     'create_time' date timestamp not null
     DEFAULT(datetime('now', 'localtime'))
     )
@@ -75,6 +76,7 @@ age int not null
     sql4 = """
      insert into public_flow(“caseName","case_desc“,"request"，“reponse“,“result")values(“中台信用卡授权交易历史信息查询“，
     """
-
+    from config.setting import ConfigInfo
+    SqliteOpera(ConfigInfo.DATABASE_SQLITE).exe_insert(create_sql)
 
 
