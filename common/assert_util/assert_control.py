@@ -8,10 +8,11 @@ from common.json_find import json_get_value
 
 
 class Assert:
-    def _init_(self, assert_data: dict):
+    def __init__(self, assert_data: dict):
         self.assert_data = assert_data
 
-    def _assert_type(self, key: str, types: str, value: str):
+    @staticmethod
+    def _assert_type(key: str, types: str, value: str):
         if str(types) == AssertMethod.equals.value:
             equals(check_value=key, expect_value=value)
         elif str(types) == AssertMethod.less_than.value:
