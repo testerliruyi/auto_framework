@@ -1,45 +1,36 @@
 """
-func: 获取yaml文件测试数据
+func: 获取yaml 或者 excel 工作表测试数据
 """
 
 from config.setting import ConfigInfo
 from common.file_handle.read_file import ReadFile
-import os, typing
+import os
+import typing
 
 
-def get_test_data(filename: typing.Union[str], path=None, selector=None):
+def get_test_data(filename: typing.Union[str], key=None):
     """
+    :param key: 测试数据关键字
     :param filename: 文件名
-    :param path: none时来示从指定目录获取测试数据，非None时夹示获取指定陪径数播
-    :param selector: 对应环境
+    :param key: 对应的关键字
     :return:
     """
-    if path is None:
-        try:
-            if filename.endswith('yaml'):
-                file_path = ConfigInfo.TEST_DATA_PATH + os.sep + filename
-                data = ReadFile.read_yaml_file(file_path, ConfigInfo.ENV)
+    try:
+        if filename.endswith('yaml'):
+            file_path = ConfigInfo.TEST_DATA_PATH + os.sep + filename
+            if key:
+                data = ReadFile.read_yaml_file(file_path, selector=ConfigInfo.ENV, key=key)
                 return data
-            elif filename.endswith('xlsx'):
-                file_path = ConfigInfo.TEST_DATA_PATH + os.sep + filename
-                data = ReadFile.read_excel(file_path, ConfigInfo.ENV)
+            else:
+                data = ReadFile.read_yaml_file(file_path, selector=ConfigInfo.ENV)
                 return data
-        except Exception as err:
-            raise FileNotFoundError("读取文件有误，请检查文件是否存在。", err)
-    else:
-        try:
-            if filename.endswith('yaml'):
-                file_path = path + os.sep + filename
-                data = ReadFile.read_yaml_file(file_path, selector=selector)
-                return data
-            elif filename.endswith("xlsx"):
-                file_path = ConfigInfo.TEST_DATA_PATH + os.sep + filename
-                data = ReadFile.read_excel(file_path, ws=selector)
-                return data
-
-        except Exception as err:
-            raise FileNotFoundError("读取文件有误，请检查文件是否存在。", err)
+        elif filename.endswith('xlsx'):
+            file_path = ConfigInfo.TEST_DATA_PATH + os.sep + filename
+            data = ReadFile.read_excel(file_path, ConfigInfo.ENV)
+            return data
+    except Exception as err:
+        raise FileNotFoundError("读取文件有误，请检查文件是否存在。", err)
 
 
 if __name__ == "__main__":
-    pass
+    print(get_test_data("datainfo.yaml", key='city'))
