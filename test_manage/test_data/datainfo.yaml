@@ -4,3 +4,5 @@ test:
     cardNo: "123456"
   card2:
     cardNo: "456789"
+  city:
+    yuanqu: "140827"

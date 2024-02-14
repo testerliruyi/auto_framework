@@ -1,2 +1,3 @@
 test:
   url1: "https://www.baidu.com"
+  api_url: "https://restapi.amap.com/v3/weather/weatherInfo"

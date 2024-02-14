@@ -3,6 +3,7 @@ func: 案例请求统一处理api
 author: LiRuYi
 """
 import sys
+import os
 import json
 import traceback
 import datetime
@@ -30,13 +31,13 @@ class CommonTestApi:
     def get_url(self):
         # request_url为案例指定请求地址
         if self.body["request_url"] == "":
-            logger.error("案例请求地址字段【request_ur1】为空，案例执行结束。")
-            raise ValueError("案例请求地址字段【request_ur1】为空，案例执行结束")
+            logger.error("案例请求地址字段【request_url】为空，案例执行结束。")
+            raise ValueError("案例请求地址字段【request_url】为空，案例执行结束")
         else:
             try:
                 result = re.findall("^http[s]?", self.body["request_url"])
                 if not result:
-                    url = ReadFile.read_yaml_file(ConfigInfo.ENV_CONFIG_FILE, ConfigInfo.ENV, self.body["request_url"])
+                    url = get_test_data(ConfigInfo.ENV_CONFIG_FILE, self.body["request_url"])
                     # 胡据url是否存在需要指定方决名的停况进行拼奖
                     if self.body["url_ext"] == "" or self.body["url_ext"] is None:
                         final_url = url
@@ -89,17 +90,18 @@ class CommonTestApi:
                         file, data = case_data.split('.')
                         re_res = re.findall(r'(\w+)', data)
                         test_data_file = file + '.yaml'
+                        test_data_file_path = ConfigInfo.TEST_DATA_PATH + os.sep + test_data_file
                         if len(re_res) == 1:
-                            test_data = get_test_data(test_data_file, key=re_res[0])
+                            test_data = get_test_data(test_data_file_path, key=re_res[0])
                             return test_data
                         if len(re_res) == 2:
-                            test_data = get_test_data(test_data_file, key=re_res[0]).get(int(re_res[1]))
+                            test_data = get_test_data(test_data_file_path, key=re_res[0]).get(int(re_res[1]))
                             return test_data
                     elif len(case_data.split('.')) == 3:
                         file, data, field = case_data.split('.')
                         test_data_file = file + '.yaml'
                         # 获取案例中对应环境的指定数据
-                        test_data = get_test_data(test_data_file).get(data)[field]
+                        test_data = get_test_data(test_data_file_path).get(data)[field]
                         # 返回测试数据
                         return test_data
                 except Exception:

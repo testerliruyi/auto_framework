@@ -126,5 +126,6 @@ class ReadFile:
 
 
 if __name__ == "__main__":
-    aa = ReadFile().read_excel(r"C:\Users\李如意\Desktop\beads.us.xlsx")
+    from config.setting import ConfigInfo
+    aa = ReadFile.read_yaml_file(ConfigInfo.ENV_CONFIG_FILE, "test")
     print(aa)

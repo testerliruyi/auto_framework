@@ -20,7 +20,7 @@
   # 请求报文体
   data:
     key: "8d2ea6e26f01172769a75f81e053693f"
-    city: ${guangzhou}
+    city: ${yuanqu}
 
 
   # 断言

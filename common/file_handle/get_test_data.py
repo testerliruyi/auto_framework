@@ -8,7 +8,7 @@ import os
 import typing
 
 
-def get_test_data(filename: typing.Union[str], key=None):
+def get_test_data(file_path: typing.Union[str], key=None):
     """
     :param key: 测试数据关键字
     :param filename: 文件名
@@ -16,16 +16,15 @@ def get_test_data(filename: typing.Union[str], key=None):
     :return:
     """
     try:
-        if filename.endswith('yaml'):
-            file_path = ConfigInfo.TEST_DATA_PATH + os.sep + filename
+        if file_path.endswith('yaml'):
             if key:
-                data = ReadFile.read_yaml_file(file_path, selector=ConfigInfo.ENV, key=key)
-                return data
+                data = ReadFile.read_yaml_file(file_path, selector=ConfigInfo.ENV)
+                return data.get(key)
             else:
                 data = ReadFile.read_yaml_file(file_path, selector=ConfigInfo.ENV)
                 return data
-        elif filename.endswith('xlsx'):
-            file_path = ConfigInfo.TEST_DATA_PATH + os.sep + filename
+        elif file_path.endswith('xlsx'):
+            file_path = ConfigInfo.TEST_DATA_PATH + os.sep + file_path
             data = ReadFile.read_excel(file_path, ConfigInfo.ENV)
             return data
     except Exception as err:

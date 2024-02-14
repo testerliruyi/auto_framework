@@ -34,9 +34,9 @@ class TestCaseAutomaticGeneration:
         yaml_path = file_path[length:]
         file_name = None
         if '.yaml' in yaml_path:
-            file_name = yaml_path.replace('.yaml', '.Py')
+            file_name = yaml_path.replace('.yaml', '.py')
         elif '.yml' in yaml_path:
-            file_name = yaml_path.replace('.yml', "-py")
+            file_name = yaml_path.replace('.yml', ".py")
         return file_name
 
     def get_case_path(self, file_path: str) -> tuple:
