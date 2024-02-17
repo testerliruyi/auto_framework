@@ -23,7 +23,7 @@ class SqliteOpera:
     def exe_query(self, sql, *args):
         try:
             self.cursor.execute(sql, args)
-            print(f"执行语句:{sql} 成功")
+            # print(f"执行语句:{sql} 成功")
             return self.cursor.fetchall()
         except Exception as e:
             raise "查询有误"
@@ -34,16 +34,12 @@ class SqliteOpera:
         try:
             self.cursor.execute(sql, args)
             self.conn.commit()
-            print(f"执行语句:{sql} 成功")
+            # print(f"执行语句:{sql} 成功")
         except Exception as e:
             self.conn.rollback()
             raise f"语句:{sql}执行有误:{e}"
         finally:
             self.conn.close()
-
-
-
-
 
 
 if __name__ == "__main__":
@@ -74,9 +70,8 @@ age int not null
     """
 
     sql4 = """
-     insert into public_flow(“caseName","case_desc“,"request"，“reponse“,“result")values(“中台信用卡授权交易历史信息查询“，
+     insert into public_flow(“caseName","case_desc“,"request"，“response“,“result")values(“中台信用卡授权交易历史信息查询“，
     """
     from config.setting import ConfigInfo
+
     SqliteOpera(ConfigInfo.DATABASE_SQLITE).exe_insert(create_sql)
-
-

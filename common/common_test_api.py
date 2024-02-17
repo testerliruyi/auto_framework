@@ -100,6 +100,7 @@ class CommonTestApi:
                     elif len(case_data.split('.')) == 3:
                         file, data, field = case_data.split('.')
                         test_data_file = file + '.yaml'
+                        test_data_file_path = ConfigInfo.TEST_DATA_PATH + os.sep + test_data_file
                         # 获取案例中对应环境的指定数据
                         test_data = get_test_data(test_data_file_path).get(data)[field]
                         # 返回测试数据

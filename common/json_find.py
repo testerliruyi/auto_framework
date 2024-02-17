@@ -1,18 +1,18 @@
 """
-author:liruyi
+author: LiRuYi
 desc:搜索json字符串关键字，使用递归写法。
 date:2023/10/10
 """
+
 import jsonpath
 
 
-
-def json_get_value(dict, key, value=None):
+def json_get_value(content: dict, key, value=None):
     def findField():
         if value and type(value) == int:
-            res = jsonpath.jsonpath(dict, f'$...{key}[{value}]')
+            res = jsonpath.jsonpath(content, f'$...{key}[{value}]')
         else:
-            res = jsonpath.jsonpath(dict, f'$...{key}')
+            res = jsonpath.jsonpath(content, f'$...{key}')
         return res
 
     def x():
@@ -23,6 +23,7 @@ def json_get_value(dict, key, value=None):
             return result[0]
 
     return x()
+
 
 def search_json(dictionary, keyword):
     results = []
@@ -35,10 +36,12 @@ def search_json(dictionary, keyword):
             for index, item in enumerate(value):
                 if isinstance(item, dict):
                     sub_results = search_json(item, keyword)
-                    results.extend([(key + '.' + str(index) + '.' + sub_key, sub_val) for sub_key, sub_val in sub_results])
+                    results.extend(
+                        [(key + '.' + str(index) + '.' + sub_key, sub_val) for sub_key, sub_val in sub_results])
         elif keyword in str(value):
             results.append((key, value))
     return results
+
 
 if __name__ == '__main__':
     book_dict = {
@@ -73,5 +76,5 @@ if __name__ == '__main__':
             }
         }
     }
-    print(jsonfind(book_dict, 'color'))
-    # print(search_json(book_dict, 'bicycle'))
+    print(json_get_value(book_dict, 'color'))
+    print(search_json(book_dict, 'color'))
