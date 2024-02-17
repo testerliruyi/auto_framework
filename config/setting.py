@@ -34,15 +34,16 @@ class ConfigInfo:
     DATABASE_SQLITE = os.path.join(BASE_DIR, "config\\autotest.sqlite")
 
     # 执行结果缓存目录
-    CASE_TMP_DIR = os.path.join(BASE_DIR,"tmp")
+    CASE_TMP_DIR = os.path.join(BASE_DIR, "tmp")
 
     # 日志保存文件路径
-    LOG_FILE_PATH = os.path.join(BASE_DIR, f"logs\/test_{Params.date_formatter(Params().now_date, formatter='%Y%m%d')}.log")
+    LOG_FILE_PATH = os.path.join(BASE_DIR,
+                                 f"logs\/test_{Params.date_formatter(Params().now_date, formatter='%Y%m%d')}.log")
 
     # 测试结果保存路径
     SAVE_TEST_RESULT_PATH = os.path.join(BASE_DIR, "test_report")
     # 视频存放路径
-    videoPath = "E:\视频目录\YYW.AI-1.18"
+    videoPath = "E:\视频目录\YYW.AI-2月2日-4日"
 
     # 循环次数
     loop_count = 5
@@ -54,10 +55,6 @@ class ConfigInfo:
 
     # ffmpeg 安装地址
     ffmpeg_DIR = r"D:\ffmpeg-6.1.1\bin"
-
-
-
-
 
 
 if __name__ == "__main__":

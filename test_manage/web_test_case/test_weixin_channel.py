@@ -1,6 +1,6 @@
 import pytest
-from Src.page_object.TX.main_page import WeixinChannel
-from common.file_handle.file_content_handle import content_handle
+from src.page_object.TX.main_page import WeixinChannel
+from common.file_handle.content_handle import content_handle
 
 
 @pytest.mark.parametrize('info', content_handle())

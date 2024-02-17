@@ -1,7 +1,7 @@
 import time
 import pytest
-from common.file_handle.file_content_handle import content_handle
-from Src.page_object.DY.new_mainpage import main_page_element
+from common.file_handle.content_handle import content_handle
+from src.page_object.DY.new_mainpage import main_page_element
 
 pageObj = main_page_element()
 

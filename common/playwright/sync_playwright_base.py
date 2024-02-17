@@ -4,7 +4,6 @@ from config.setting import ConfigInfo
 import os
 
 
-
 class SyncPlayWrightWrapper:
     def __init__(self, param: Union[None, str] = None, browser_type="chromium"):
         self.playWright = sync_playwright().start()
@@ -22,7 +21,6 @@ class SyncPlayWrightWrapper:
         elif param.lower() == "local":
             print("current mode is: local")
             self.page = self.__lunch_local_browser()
-
 
     # 默认方法启动浏览器
     def __lunch_default_browser(self):
@@ -80,7 +78,8 @@ class SyncPlayWrightWrapper:
 
     # 使用get_by方式定位元素
     def get_by(self, action: Optional[Literal["role", "text", "label", "placeholder", "alt_text", "title", "test_id"]],
-               content: Union[str,Literal["alert", "alertdialog", "application", "article", "banner", "blockquote", "button", "caption", "cell", "checkbox", "code", "columnheader", "combobox", "complementary", "contentinfo", "definition", "deletion", "dialog", "directory", "document", "emphasis", "feed", "figure", "form", "generic", "grid", "gridcell", "group", "heading", "img", "insertion", "link", "list", "listbox", "listitem", "log", "main", "marquee", "math", "menu", "menubar", "menuitem", "menuitemcheckbox", "menuitemradio", "meter", "navigation", "none", "note", "option", "paragraph", "presentation", "progressbar", "radio", "radiogroup", "region", "row", "rowgroup", "rowheader", "scrollbar", "search", "searchbox", "separator", "slider", "spinbutton", "status", "strong", "subscript", "superscript", "switch", "tab", "table", "tablist", "tabpanel", "term", "textbox", "time", "timer", "toolbar", "tooltip", "tree", "treegrid", "treeitem"]],
+               content: Union[str, Literal[
+                   "alert", "alertdialog", "application", "article", "banner", "blockquote", "button", "caption", "cell", "checkbox", "code", "columnheader", "combobox", "complementary", "contentinfo", "definition", "deletion", "dialog", "directory", "document", "emphasis", "feed", "figure", "form", "generic", "grid", "gridcell", "group", "heading", "img", "insertion", "link", "list", "listbox", "listitem", "log", "main", "marquee", "math", "menu", "menubar", "menuitem", "menuitemcheckbox", "menuitemradio", "meter", "navigation", "none", "note", "option", "paragraph", "presentation", "progressbar", "radio", "radiogroup", "region", "row", "rowgroup", "rowheader", "scrollbar", "search", "searchbox", "separator", "slider", "spinbutton", "status", "strong", "subscript", "superscript", "switch", "tab", "table", "tablist", "tabpanel", "term", "textbox", "time", "timer", "toolbar", "tooltip", "tree", "treegrid", "treeitem"]],
                name=None,
                exact=True):
         match action.lower():
@@ -111,6 +110,7 @@ class SyncPlayWrightWrapper:
     def query_element(self, selector):
         element = self.page.query_selector(selector)
         return element
+
     # 上传文件
     def upload_file(self, selector, path: str):
         self.get_locator(selector).set_input_files(path)
@@ -125,12 +125,12 @@ class SyncPlayWrightWrapper:
                            state: Optional[Literal["attached", "detached", "hidden", "visible"]] = "visible",
                            timeout=10000):
         self.page.wait_for_selector(selector, state=state, timeout=timeout)
-        
+
     # 浏览器存在打开新标签时，使用此方法等待新页面出现
     def wait_for_new_page(self):
         new_page = self.context.wait_for_event("page")
         return new_page
-    
+
     # 获取浏览器上下文所有页面标签
     def get_all_pages(self):
         self.wait_for_new_page()
@@ -151,10 +151,9 @@ class SyncPlayWrightWrapper:
             path = os.path.join(ConfigInfo.SAVE_TEST_RESULT_PATH, file_name)
             self.page.screenshot(path=path, full_page=True)
 
-    #切换到最新标签
+    # 切换到最新标签
     def get_all_pages(self):
         return self.context.pages
-    
 
 
 if __name__ == "__main__":
