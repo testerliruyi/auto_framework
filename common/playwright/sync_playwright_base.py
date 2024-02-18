@@ -25,13 +25,15 @@ class SyncPlayWrightWrapper:
     # 默认方法启动浏览器
     def __lunch_default_browser(self):
         if self.browser_type == "chromium":
-            self.browser = self.playWright.chromium.launch(headless=False, timeout=100000, args=['--start-maximized'])
+            self.browser = self.playWright.chromium.launch(headless=False, timeout=100000, args=['--start-maximized'],
+                                                           executable_path=r"E:\playwright_driver\chromium-1097\chrome-win\chrome.exe")
+            # executable_path 为本地chrome 驱动路径，不指定时使用安装在playwright 默认路径驱动。
         elif self.browser_type == "firefox":
             self.browser = self.playWright.firefox.launch(headless=False, timeout=100000, args=['--start-maximized'])
         elif self.browser_type == "webkit":
             self.browser = self.playWright.webkit.launch(headless=False, timeout=100000, args=['--start-maximized'])
-        context = self.browser.new_context(no_viewport=True)
-        self.page = context.new_page()
+        self.context = self.browser.new_context(no_viewport=True)
+        self.page = self.context.new_page()
         return self.page
 
     # 指定端口页面启动浏览器
@@ -48,9 +50,9 @@ class SyncPlayWrightWrapper:
         if self.browser_type == "chromium":
             self.browser = self.playWright.chromium.launch_persistent_context(
                 # 指定本地缓存
-                user_data_dir="D:\selenium\chrome_temp",
+                user_data_dir="D:\\selenium\\chrome_temp",
                 # 指定本机chrome地址
-                executable_path="C:\Program Files\Google\Chrome\Application\chrome.exe",
+                executable_path="C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
                 accept_downloads=True,
                 headless=False,
                 bypass_csp=True,
@@ -73,7 +75,7 @@ class SyncPlayWrightWrapper:
         self.page.goto(url, timeout=time, wait_until="commit")
 
     # 使用locator方式定位元素
-    def get_locator(self, selector):
+    def locator(self, selector):
         return self.page.locator(selector)
 
     # 使用get_by方式定位元素
@@ -150,10 +152,6 @@ class SyncPlayWrightWrapper:
         else:
             path = os.path.join(ConfigInfo.SAVE_TEST_RESULT_PATH, file_name)
             self.page.screenshot(path=path, full_page=True)
-
-    # 切换到最新标签
-    def get_all_pages(self):
-        return self.context.pages
 
 
 if __name__ == "__main__":

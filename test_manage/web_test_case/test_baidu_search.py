@@ -5,6 +5,7 @@ from src.page_object.baidu.sitepage import main_page_element
 
 page = main_page_element()
 
+
 class TestBaiduSearch:
 
     def setup_class(self):
