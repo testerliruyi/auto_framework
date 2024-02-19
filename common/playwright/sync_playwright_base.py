@@ -102,11 +102,11 @@ class SyncPlayWrightWrapper:
 
     # 点击元素
     def click_element(self, selector):
-        self.get_locator(selector).click()
+        self.locator(selector).click()
 
     # 输入文本
     def input_text(self, selector, text: str):
-        self.get_locator(selector).fill(text)
+        self.locator(selector).fill(text)
 
     # 查询元素
     def query_element(self, selector):
@@ -115,7 +115,7 @@ class SyncPlayWrightWrapper:
 
     # 上传文件
     def upload_file(self, selector, path: str):
-        self.get_locator(selector).set_input_files(path)
+        self.locator(selector).set_input_files(path)
 
     # 获取元素文本
     def get_text_content(self, selector):

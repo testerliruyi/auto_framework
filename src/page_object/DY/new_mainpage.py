@@ -36,10 +36,11 @@ class main_page_element(SyncPlayWrightWrapper):
             new_x = '#' + x
             self.page.locator('.zone-container').type(new_x)
             first_lab = self.get_by('text', content=x)
-            self.expect(first_lab).to_be_visible()
             first_lab.click()
 
     def click_public_button(self):
         wait_element = self.get_by('text', "取消上传")
         self.expect(wait_element).to_be_hidden()
         self.page.get_by_role('button', name='发布', exact=True).click()
+        # 等待发布成功提示信息出现
+        self.expect(self.page.get_by_text("发布成功")).to_be_visible()

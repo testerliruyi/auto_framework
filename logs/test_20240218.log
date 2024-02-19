@@ -1,0 +1,31 @@
+2024-02-18 17:21:07,812-INFO-执行测试案例：获取天气信息_广州
+2024-02-18 17:21:07,812-INFO-当前测试环境为：test
+2024-02-18 17:21:07,821-INFO-请求地址：https://restapi.amap.com/v3/weather/weatherInfo
+2024-02-18 17:21:07,829-INFO-获取天气信息_广州请求报文:
+{
+    "city": "140827",
+    "key": "8d2ea6e26f01172769a75f81e053693f"
+}
+2024-02-18 17:21:08,232-INFO-响应报文是:
+{
+    "count": "1",
+    "info": "OK",
+    "infocode": "10000",
+    "lives": [
+        {
+            "adcode": "140827",
+            "city": "垣曲县",
+            "humidity": "31",
+            "humidity_float": "31.0",
+            "province": "山西",
+            "reporttime": "2024-02-18 17:07:36",
+            "temperature": "11",
+            "temperature_float": "11.0",
+            "weather": "扬沙",
+            "winddirection": "西",
+            "windpower": "4"
+        }
+    ],
+    "status": "1"
+}
+2024-02-18 17:21:08,237-INFO-【断言结果】is True,【实际结果】：1，【预期结果】：1

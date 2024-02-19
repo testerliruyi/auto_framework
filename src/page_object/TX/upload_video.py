@@ -39,12 +39,17 @@ class UploadVideoPage(SyncPlayWrightWrapper):
             # 判断发表成功
             self.expect(self.page.get_by_text("已发表")).to_be_visible()
 
+    def declare_click(self):
+        declare_button = self.page.query_selector('.declare-original-checkbox input')
+        if declare_button:
+            self.page.locator('.declare-original-checkbox input').click()
+            locs = self.page.query_selector_all('.form-content dt')
+            locs[0].click()
+            self.page.get_by_text('科技').nth(1).click()
+            self.locator(".original-proto-wrapper label.ant-checkbox-wrapper").nth(1).click()
+        else:
+            pass
 
-
-
-
-
-
-
-
-
+    def logout(self):
+        self.page.locator('//div[@class="account-info"]').click()
+        self.page.locator('//div[text()="退出登录"]').click()
