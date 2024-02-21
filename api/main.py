@@ -1,25 +1,33 @@
 from fastapi import FastAPI
 from pydantic import BaseModel, EmailStr
-from enum import Enum
+from typing import Any, Union, Optional
 
 
-class ModelName(str,Enum):
-    alexnet = 'alexnet'
-    resnet = 'resnet'
+class CaseCommon(BaseModel):
+    allureStory: str
+
+
+class Data(BaseModel):
+    key: str
+    city: str
+
+
+class Item(BaseModel):
+    case_common: Union[CaseCommon]
+    case_title: str
+    method: str
+    url_ext: Union[str, None] = None
+    test_data: str
+    depend_case: Union[str, None] = None
+    headers: Any
+    data: Union[Data]
+    Assert: Any
+
+
 app = FastAPI()
 
 
-@app.get('/')
-async def root():
-    return {"message": "hello world"}
-
-@app.get('/models/{model_name}')
-async def get_model(model_name:ModelName):
-    if model_name is ModelName.alexnet:
-        return {"model_name":model_name,"message":"deep"}
-
-
-
-@app.get("/item/{item_id}")
-async def read_item(item_id):
-    return {"item_id": item_id}
+@app.post("/api_test/")
+async def api_test(item: Item):
+    print(item)
+    return item

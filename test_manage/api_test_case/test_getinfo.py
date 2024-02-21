@@ -28,7 +28,7 @@ class TestGetinfo:
         # 数据库中获取响应结果
         response_data = ct.CommonTestApi().get_case_content(body["caseFileName"], 'reponse')
         # 案例断言
-        Assert(body["assert"]).assert_equality(json.loads(response_data))
+        Assert(body["Assert"]).assert_equality(json.loads(response_data))
 
 
 if __name__ == "__main__":

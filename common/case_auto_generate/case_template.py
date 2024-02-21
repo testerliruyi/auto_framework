@@ -49,7 +49,7 @@ class Test{class_tile}:
         # 数据库中获取响应结果,用于进行断言验证
         response_data = ct.CommonTestApi(body).get_case_content(body["caseFileName"], 'response')
         # 案例断言
-        Assert(body["assert"]).assert_equality(json.loads(response_data))
+        Assert(body["Assert"]).assert_equality(json.loads(response_data))
 
 
 if __name__ == "__main__":

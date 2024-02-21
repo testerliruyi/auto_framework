@@ -22,7 +22,7 @@
 
 
   # 断言
-  assert:
+  Assert:
     retCode:
       Type: ==
       value:

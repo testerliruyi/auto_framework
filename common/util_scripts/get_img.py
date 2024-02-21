@@ -15,8 +15,8 @@ class GetImg(GetLinkPro):
 
 
 if __name__ == "__main__":
-    url_link = "https://m.beads.us"
-    img_prex = ["grey.gif"]
+    url_link = "https://www.beads.us/"
+    img_prex = ["facebook.png"]
     all_links = GetImg().get_links(url_link, 'a', 'href')
     print("所有links:", all_links)
     print("总link个数：", len(all_links))

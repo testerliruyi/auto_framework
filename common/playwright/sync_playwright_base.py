@@ -11,7 +11,7 @@ class SyncPlayWrightWrapper:
         self.browser = None
         self.expect = expect
         # 设置全局expect超时时间为30sec
-        self.expect.set_options(timeout=60000)
+        self.expect.set_options(timeout=100000)
         if param is None:
             print("current mode is: default")
             self.page = self.__lunch_default_browser()

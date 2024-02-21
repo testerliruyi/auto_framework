@@ -13,8 +13,8 @@ page = XhsUploadVideo()
 @pytest.mark.parametrize("info", content_handle())
 class TestXhsUploadVideo:
 
-    # def setup_class(self):
-    #     page.open_url()
+    def setup_class(self):
+        page.open_url()
 
     def test_upload_video(self, info):
         # 点击发布并上传视频

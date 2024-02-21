@@ -18,12 +18,13 @@ class TestGetWeather:
     # @pytest.mark.parametrize('dataInfo', get_test_data("creditCard.xlsx"))
     @pytest.mark.parametrize("body", get_case_detail("get_weather.yaml"))
     def test_get_weather(self, body):
+        print(body)
         # 对案例报文进行处理，并发起接口请求
         ct.CommonTestApi(body).api_request()
         # 数据库中获取响应结果,用于进行断言验证
         response_data = ct.CommonTestApi(body).get_case_content(body["caseFileName"], 'response')
         # 案例断言
-        Assert(body["assert"]).assert_equality(json.loads(response_data))
+        Assert(body["Assert"]).assert_equality(json.loads(response_data))
 
 
 if __name__ == "__main__":

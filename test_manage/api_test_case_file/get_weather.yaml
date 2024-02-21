@@ -24,7 +24,7 @@
 
 
   # 断言
-  assert:
+  Assert:
     status:
       Type: ==
       value: "1"

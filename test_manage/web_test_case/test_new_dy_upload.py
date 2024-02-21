@@ -9,8 +9,8 @@ pageObj = main_page_element()
 @pytest.mark.parametrize("info", content_handle())
 class TestDyVideoPublic:
 
-    # def setup_class(self):
-    #     pageObj.go_url()
+    def setup_class(self):
+        pageObj.go_url()
 
     def test_upload_video(self, info):
         pageObj.click_btn_and_inputVideoPath(info['path'])

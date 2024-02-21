@@ -1,5 +1,5 @@
 """
-@author Liruyi
+@author LiRuYi
 func: 自动生成自动化测试中的test_case代码！
 """
 

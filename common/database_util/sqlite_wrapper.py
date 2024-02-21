@@ -1,3 +1,8 @@
+"""
+func: sqlite 数据库基本操作封装函数
+author: LiRuYi
+"""
+
 import sqlite3
 
 

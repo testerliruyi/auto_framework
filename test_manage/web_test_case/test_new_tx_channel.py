@@ -14,7 +14,12 @@ class TestTxUploadVideo:
 
     # 点击发布视频按钮
     def test_upload_video(self, info):
-        # 点击发布视频按钮
+        # 点击发布视频按钮并填写视频信息
         page.click_upload_button(info)
         # 判断原创声明是否存在，存在则点击，否则略过
-        # page.declare_click()
+        page.declare_click()
+        # 发布视频
+        page.public_video()
+
+    def teardown_class(self):
+        page.logout()

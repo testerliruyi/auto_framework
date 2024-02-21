@@ -43,7 +43,7 @@ class ConfigInfo:
     # 测试结果保存路径
     SAVE_TEST_RESULT_PATH = os.path.join(BASE_DIR, "test_report")
     # 视频存放路径
-    videoPath = "E:\视频目录\YYW.AI-2月2日-4日"
+    videoPath = r"E:\视频目录\YYW.AI-2.20"
 
     # 循环次数
     loop_count = 5
@@ -59,6 +59,6 @@ class ConfigInfo:
 
 if __name__ == "__main__":
     # 获取文件列表
-    # for i in get_files(ConfigInfo.videoPath):
-    #     print(i)
-    print(ConfigInfo.TEST_CASE_FILE)
+    for i in get_files(ConfigInfo.videoPath):
+        print(i)
+    # print(ConfigInfo.TEST_CASE_FILE)
