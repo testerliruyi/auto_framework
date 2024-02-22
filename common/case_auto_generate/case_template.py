@@ -29,7 +29,6 @@ def write_testcase_file(allure_story, class_tile, func_title, case_path, file_na
 # func:  测试案例执行
 import pytest
 import allure
-import json
 from common.file_handle.get_case_detail import get_case_detail
 from common import common_test_api as ct
 from common.assert_util.assert_control import Assert
@@ -45,11 +44,9 @@ class Test{class_tile}:
     @pytest.mark.parametrize("body", get_case_detail("{yaml_file_name}"))
     def test_{func_title}(self, body):
         # 对案例报文进行处理，并发起接口请求
-        ct.CommonTestApi(body).api_request()
-        # 数据库中获取响应结果,用于进行断言验证
-        response_data = ct.CommonTestApi(body).get_case_content(body["caseFileName"], 'response')
+        response_data = ct.CommonTestApi(body).api_request()
         # 案例断言
-        Assert(body["Assert"]).assert_equality(json.loads(response_data))
+        Assert(body["Assert"]).assert_equality(response_data)
 
 
 if __name__ == "__main__":

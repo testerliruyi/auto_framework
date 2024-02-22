@@ -1,4 +1,4 @@
-from common.util_scripts.get_link_status import GetLinkPro
+from util_scripts.get_link_status import GetLinkPro
 
 
 class GetImg(GetLinkPro):

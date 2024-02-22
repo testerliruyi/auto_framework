@@ -1,33 +1,19 @@
+import uvicorn
 from fastapi import FastAPI
-from pydantic import BaseModel, EmailStr
-from typing import Any, Union, Optional
-
-
-class CaseCommon(BaseModel):
-    allureStory: str
-
-
-class Data(BaseModel):
-    key: str
-    city: str
-
-
-class Item(BaseModel):
-    case_common: Union[CaseCommon]
-    case_title: str
-    method: str
-    url_ext: Union[str, None] = None
-    test_data: str
-    depend_case: Union[str, None] = None
-    headers: Any
-    data: Union[Data]
-    Assert: Any
+from api.router import execute_api
 
 
 app = FastAPI()
 
+app.include_router(execute_api.api_router)
 
-@app.post("/api_test/")
-async def api_test(item: Item):
-    print(item)
-    return item
+
+@app.get('/')
+async def root():
+    return {"message": "welcome my api test framework"}
+
+
+if __name__ == "__main__":
+    # command = "uvicorn api.main:app  --reload"
+    # subprocess.run(command)
+    uvicorn.run(app, host='127.0.0.1', port=8000,)

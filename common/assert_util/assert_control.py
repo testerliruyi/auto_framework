@@ -46,7 +46,7 @@ class Assert:
         else:
             raise ValueError("断言失败，目前只支持数据库断言和响应断言")
 
-    def assert_equality(self, response_data: dict, status_code = None):
+    def assert_equality(self, response_data: dict, status_code=None):
         for key, values in self.assert_data.items():
             if key == "status code":
                 assert status_code == values
@@ -56,7 +56,7 @@ class Assert:
                 # 获取判断类型
                 assert_type = self.assert_data[key]['AssertType']
                 # 从响应数据中提欣期望字段的值
-                resp_key_value = json_get_value(response_data,key)
+                resp_key_value = json_get_value(response_data, key)
                 # 如果数据获取失败，则返回false，判断获取成功再执行加下代码
                 if resp_key_value:
                     # 案例断言处理

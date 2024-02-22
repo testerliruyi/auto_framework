@@ -20,7 +20,7 @@ class SetLogger(ConfigInfo):
 
     # 日志文件设置
     def set_file_handler(self):
-        file_handler = logging.FileHandler(filename=self.file, mode='w', encoding='utf-8')
+        file_handler = logging.FileHandler(filename=self.file, mode='a', encoding='utf-8')
         file_handler.setFormatter(self.set_formatter())
         file_handler.setLevel(logging.INFO)
         self.log.addHandler(file_handler)

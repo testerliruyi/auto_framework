@@ -9,7 +9,6 @@ import traceback
 import datetime
 import re
 import typing
-from common.file_handle.read_file import ReadFile
 from common.send_request import SendRequest
 from common.params import Params
 from common.json_formatter import json_formatter
@@ -130,10 +129,10 @@ class CommonTestApi:
         try:
             if self.body['method'].upper() == "GET":
                 res = SendRequest.do_request(url, self.body['method'], headers=headers, params=body_data)
-                print(res.json())
+                # print(res.json())
             elif self.body['method'].upper() == "POST":
                 res = SendRequest.do_request(url, self.body['method'], headers=headers, json=body_data)
-                print(res)
+                # print(res)
             # 请求成功，将执行结果写入缓存文件
             if str(res) == "<Response [200]>":
                 # 将响应信息保存到数据库中。
@@ -152,7 +151,7 @@ class CommonTestApi:
                                                                    1, now)
                 logger.info("响应报文是:\n" + json_formatter(res.json()))
                 return res.json()
-        except Exception:
+        except Exception as err:
             res = traceback.print_exc(limit=1, file=sys.stdout)
             logger.error(
                 f"接口请求失败，请检查请求链接是否存在或正确，本流程执行结束。{res}")
@@ -225,10 +224,13 @@ class CommonTestApi:
             if case_handle_result:
                 result = self.send_request(case_handle_result[0], case_handle_result[1], case_handle_result[2])
                 if result:
-                    pass
+                    return result
                 else:
+                    logger.error(f"案例中【请求链接】发起请求拒绝，请排查环境是否正常以及请求链接是否正确!")
                     raise ConnectionRefusedError("请求链接拒绝或链接不存在，请排查。")
+
             else:
+                logger.error("案例信息不完整，案例执行结束")
                 raise KeyError("案例数据不完整，案例执行结束")
         else:
             case_handle_result = self.common_param_handle()
@@ -236,10 +238,11 @@ class CommonTestApi:
                 # 根据清示结果判断为false时责示的示失败，否则为成动
                 result = self.send_request(case_handle_result[0], case_handle_result[1], case_handle_result[2])
                 if result:
-                    pass
+                    return result
                 else:
                     logger.error(f"案例中【请求链接】发起请求拒绝，请排查环境是否正常以及请求链接是否正确!")
                     raise ConnectionRefusedError(
                         "Error：案例中【请求链接】发起请求拒绝，请排查环境是否正常以及请求链接是否正确！")
             else:
+                logger.error(f"案例信息不完整，案例执行结束")
                 raise KeyError("案例数据不完整，案例执行结束")

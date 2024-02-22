@@ -43,12 +43,13 @@ class ConfigInfo:
     # 测试结果保存路径
     SAVE_TEST_RESULT_PATH = os.path.join(BASE_DIR, "test_report")
     # 视频存放路径
-    videoPath = r"E:\视频目录\YYW.AI-2.20"
+    videoPath = r"E:\视频目录\YYW.AI-2.22"
 
     # 循环次数
     loop_count = 5
 
-    real_time_update_test_cases = False
+    # yaml案例生成标志（True: 表示查询所有yaml案例文件重新生成py测试案例，False:仅处理未生成py测试案例的yaml文件）
+    real_time_update_test_cases = True
 
     # 系统分隔符
     os_sep = os.sep

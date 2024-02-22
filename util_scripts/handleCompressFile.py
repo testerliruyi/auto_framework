@@ -8,7 +8,7 @@ def compress_file(tarfilename,dirname):
         with tarfile.open(tarfilename, 'w') as tar:
             for root,dirs,files in os.walk(dirname):
                 os.chdir(dirname)
-                os.chdir('../..')
+                os.chdir('..')
                 path = os.getcwd()
                 root_path = os.path.relpath(root,path )
                 print("当前文件:",root_path)
