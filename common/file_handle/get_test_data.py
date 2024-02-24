@@ -11,7 +11,7 @@ import typing
 def get_test_data(file_path: typing.Union[str], key=None):
     """
     :param key: 测试数据关键字
-    :param filename: 文件名
+    :param file_path: 文件名
     :param key: 对应的关键字
     :return:
     """

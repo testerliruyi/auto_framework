@@ -12,14 +12,14 @@ import typing
 from common.send_request import SendRequest
 from common.params import Params
 from common.json_formatter import json_formatter
-from common.log.set_logger import logger_obj
+from common.log.set_logger import file_logger_obj, stream_logger_obj
 from config.setting import ConfigInfo
 from common.template_init import normal_template_init, special_template_init
 from common.file_handle.get_test_data import get_test_data
 from common.database_util.sqlite_wrapper import SqliteOpera
 
 # 创建日志对象
-logger = logger_obj()
+logger = file_logger_obj()
 
 
 class CommonTestApi:
@@ -127,16 +127,17 @@ class CommonTestApi:
     # 发起接口请求
     def send_request(self, url, headers, body_data):
         try:
-            if self.body['method'].upper() == "GET":
-                res = SendRequest.do_request(url, self.body['method'], headers=headers, params=body_data)
-                # print(res.json())
-            elif self.body['method'].upper() == "POST":
-                res = SendRequest.do_request(url, self.body['method'], headers=headers, json=body_data)
-                # print(res)
+            # if self.body['method'].upper() == "GET":
+            #     request_result = SendRequest.do_request(url, self.body['method'], headers=headers, params=body_data)
+            # elif self.body['method'].upper() == "POST":
+            request_result = SendRequest.do_request(url, self.body['method'], headers=headers, params=body_data, json=body_data)
             # 请求成功，将执行结果写入缓存文件
-            if str(res) == "<Response [200]>":
-                # 将响应信息保存到数据库中。
+            if str(request_result) == "<Response [200]>":
+                # 将响应信息保存到数据库中。W
+                # if "caseFileName" in self.body.keys():
                 case_title = str(self.body["caseFileName"])
+                # else:
+                #     case_title = self.body["case_title"]
                 # 获取案例描述
                 desc = str(self.body['case_title'])
                 now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -147,10 +148,10 @@ class CommonTestApi:
                 """
                 # 请求结果落库
                 SqliteOpera(ConfigInfo.DATABASE_SQLITE).exe_insert(insert_sql, case_title, desc, json.dumps(body_data),
-                                                                   json.dumps(res.json()),
+                                                                   json.dumps(request_result.json()),
                                                                    1, now)
-                logger.info("响应报文是:\n" + json_formatter(res.json()))
-                return res.json()
+                logger.info("响应报文是:\n" + json_formatter(request_result.json()))
+                return request_result.json()
         except Exception as err:
             res = traceback.print_exc(limit=1, file=sys.stdout)
             logger.error(
@@ -171,17 +172,11 @@ class CommonTestApi:
             # 处理案例中依赖案例的响应报文
             handle_rep_result = special_template_init.special_template_init(ConfigInfo.DepRep_patt, handle_req_result,
                                                                             json.loads(depend_case_content["response"]))
-            # 对结果转换为字典格式并营换接口中的报文体
+            # 对结果转换为字典格式并替换接口中的报文体
             self.body["data"] = json.loads(handle_rep_result)
             # return self.body
         except Exception as err:
             raise ValueError("处理依赖案例内容时有误，报错信息：", err)
-
-    def param_Handle(self, testData):
-        # 初始化流水号参数
-        init_Param = Params().common_param()
-        for k, v in testData.items():
-            init_Param[k] = v
 
     def common_param_handle(self, test_data: dict = None):
         logger.info(f"执行测试案例：{self.body['case_title']}")
@@ -191,7 +186,7 @@ class CommonTestApi:
         # 获取到依赖名称
         depend_case_name = self.get_depend_case()
         if depend_case_name:
-            body = self.depend_case_init(depend_case_name)
+            self.depend_case_init(depend_case_name)
         # 从pytest数据驱动中获取测试数据字典
         if test_data:
             data_info = self._get_test_data(data_info=test_data)

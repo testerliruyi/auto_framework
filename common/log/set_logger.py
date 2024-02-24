@@ -20,7 +20,7 @@ class SetLogger(ConfigInfo):
 
     # 日志文件设置
     def set_file_handler(self):
-        file_handler = logging.FileHandler(filename=self.file, mode='a', encoding='utf-8')
+        file_handler = logging.FileHandler(filename=self.file, mode='w', encoding='utf-8')
         file_handler.setFormatter(self.set_formatter())
         file_handler.setLevel(logging.INFO)
         self.log.addHandler(file_handler)
@@ -31,18 +31,24 @@ class SetLogger(ConfigInfo):
         stream_handler.setLevel(logging.INFO)
         self.log.addHandler(stream_handler)
 
-    def get_logger(self):
+    def get_file_logger(self):
         self.set_file_handler()
         return self.log
 
+    def get_stream_logger(self):
+        self.set_Stream_handler()
+        return self.log
 
-def logger_obj():
-    logger = SetLogger().get_logger()
+
+def file_logger_obj():
+    logger = SetLogger().get_file_logger()
+    return logger
+
+
+def stream_logger_obj():
+    logger = SetLogger().get_stream_logger()
     return logger
 
 
 if __name__ == "__main__":
-    logger_obj()
-
-
-
+    file_logger_obj()

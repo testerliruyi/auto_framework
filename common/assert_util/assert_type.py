@@ -13,9 +13,16 @@ def equals(check_value, expect_value):
     try:
         assert check_value == expect_value
         logger.info(f"【断言结果】is True,【实际结果】：{check_value}，【预期结果】：{expect_value}")
+        return {"expect_value": expect_value, "check_value": check_value, "assert_result": "True"}
     except Exception as e:
         logger.error(f"【断言结果】is False,【实际结果】：{check_value}，【预期结果】：{expect_value}")
-        raise AssertionError("断言结果为失败")
+        return {"expect_value": expect_value, "check_value": check_value, "assert_result": "False"}
+        # raise AssertionError("断言结果为失败", e)
+
+
+
+
+
 
 
 # 判断实际结果小于预期结果
@@ -45,6 +52,7 @@ def greater_than(check_value, expect_value):
         logger.error(f"【断言结果】 is False，【实际结果】：{check_value}，【预期结果】：{expect_value}")
         raise AssertionError("断言结果为失败")
 
+
 # 判断实际结果大于等于预期结果
 def greater_than_or_equals(check_value, expect_value):
     try:
@@ -70,5 +78,3 @@ def contains(check_value, expect_value):
         logger.info(f"【断言结果】is True,【实际结果】：{check_value}，【预期结果】：{expect_value}")
     except Exception as e:
         logger.error(f"【断言结果】 is False,【实际结果】：{check_value}，【预期结果】：{expect_value}")
-
-

@@ -14,11 +14,11 @@ class Assert:
     @staticmethod
     def _assert_type(key: str, types: str, value: str):
         if str(types) == AssertMethod.equals.value:
-            equals(check_value=key, expect_value=value)
+            return equals(check_value=key, expect_value=value)
         elif str(types) == AssertMethod.less_than.value:
-            less_than(check_value=key, expect_value=value)
+            return less_than(check_value=key, expect_value=value)
         elif str(types) == AssertMethod.less_than_or_equals.value:
-            less_than_or_equals(check_value=key, expect_value=value)
+            return less_than_or_equals(check_value=key, expect_value=value)
         elif str(types) == AssertMethod.greater_than.value:
             greater_than(check_value=key, expect_value=value)
         elif str(types) == AssertMethod.greater_than_or_equals.value:
@@ -41,8 +41,8 @@ class Assert:
         # 判断断言类型
         if assert_type == 'SQL':
             pass
-        elif assert_type is None:
-            self._assert_type(types=self.assert_data[key]['Type'], key=resp_key_value, value=assert_value)
+        elif assert_type is None or assert_type == '':
+            return self._assert_type(types=self.assert_data[key]['Type'], key=resp_key_value, value=assert_value)
         else:
             raise ValueError("断言失败，目前只支持数据库断言和响应断言")
 
@@ -60,6 +60,6 @@ class Assert:
                 # 如果数据获取失败，则返回false，判断获取成功再执行加下代码
                 if resp_key_value:
                     # 案例断言处理
-                    self.assert_type_handle(assert_type, key, assert_value, resp_key_value)
+                    return self.assert_type_handle(assert_type, key, assert_value, resp_key_value)
                 else:
                     raise ValueError(f"响应报文中{key}值不存在")
