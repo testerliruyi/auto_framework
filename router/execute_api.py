@@ -2,12 +2,12 @@
 @author: LiRuYi
 @func:  router
 """
-import json
-
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Union, Any
 from module.common_api import CommonFunctionApi
+from common.log.set_logger import file_logger_obj
+import json
 
 api_router = APIRouter(
     prefix="/test",
@@ -23,6 +23,7 @@ class CaseCommon(BaseModel):
 class Data(BaseModel):
     key: str
     city: str
+
 
 # 定义请求体模型
 class Item(BaseModel):
@@ -52,10 +53,12 @@ async def create_request(item: Item):
     # 请求体转为dict,方便其他函数使用.
     item_dict = item.model_dump()
     request_func = CommonFunctionApi(item_dict)
-    # 使用参数进行请求并进行断言操作
+    # 进行接口请求
     response_result = request_func.api_reqeust()
+    # 使用参数进行请求并进行断言操作
     assert_result = request_func.api_assert(response_result)
     final_dict = {"response": response_result, "assert_result": assert_result}
+    # file_logger_obj().info("案例执行", json.dumps(final_dict))
     return final_dict
 
 

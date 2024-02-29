@@ -32,12 +32,15 @@ class ReadFile:
 
     # 读取yaml文件
     @staticmethod
-    def read_yaml_file(path: str, selector=None) -> dict:
+    def read_yaml_file(path: str, selector=None, *args) -> dict:
         with open(path, encoding='utf-8') as file:
             data = yaml.safe_load(file)
             if selector:
                 info = data.get(selector)
-                return info
+                if args:
+                    return info.get(args[0])
+                else:
+                    return info
             else:
                 return data
 

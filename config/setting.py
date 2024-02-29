@@ -38,12 +38,12 @@ class ConfigInfo:
 
     # 日志保存文件路径
     LOG_FILE_PATH = os.path.join(BASE_DIR,
-                                 f"logs\/test_{Params.date_formatter(Params().now_date, formatter='%Y%m%d')}.log")
+                                 f"logs/test_{Params.date_formatter(Params().now_date, formatter='%Y%m%d')}.log")
 
     # 测试结果保存路径
     SAVE_TEST_RESULT_PATH = os.path.join(BASE_DIR, "test_report")
     # 视频存放路径
-    videoPath = r"E:\视频目录\YYW.AI-2.22"
+    videoPath = r"E:\视频目录\YYW.AI-2.28"
 
     # 循环次数
     loop_count = 5

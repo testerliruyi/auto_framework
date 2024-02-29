@@ -20,8 +20,11 @@ class CommonFunctionApi:
         return Assert(self.content["Assert"]).assert_equality(response_data)
 
 
-
 if __name__ == "__main__":
-    import sys
-
-    print(sys.path)
+    item = {"case_common": {"allureStory": "获取天气信息"}, "case_title": "获取天气信息_广州", "method": "get",
+            "request_url": "api_url", "url_ext": "", "test_data": "datainfo.city", "depend_case": "",
+            "headers": {"content-type": "json"},
+            "data": {"key": "8d2ea6e26f01172769a75f81e053693f", "city": "${yuanqu}"},
+            "Assert": {"status": {"Type": "==", "value": "0", "AssertType": ""}}, "caseFileName": "get_weather"}
+    res = CommonFunctionApi(item).api_reqeust()
+    print(res)
