@@ -1,5 +1,5 @@
-from Src.page_object.XHS.main_page import MainPage
-from common.file_handle.file_content_handle import content_handle
+from src.page_object.XHS.main_page import MainPage
+from common.file_handle.content_handle import content_handle
 import pytest
 
 

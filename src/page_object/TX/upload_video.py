@@ -23,6 +23,7 @@ class UploadVideoPage(SyncPlayWrightWrapper):
         self.page.locator(".input-editor").fill(info["desc"])
         self.page.locator(".position-display").click()
         # 选择不显示位置
+        self.page.wait_for_selector('//div[@class="location-filter-wrap"]//div[text()="不显示位置"]', timeout=60000, state="visible")
         self.page.locator('//div[@class="location-filter-wrap"]//div[text()="不显示位置"]').click()
         self.page.locator('input[type="text"][placeholder*="概括视频主要内容"]').fill(info['title'])
 

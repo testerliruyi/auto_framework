@@ -21,11 +21,11 @@ class main_page_element(SyncPlayWrightWrapper):
         if login_info:
             login_info.click()
             self.page.wait_for_selector("#txtUserName", state="visible", timeout=60000)
-            self.get_locator("#txtUserName").fill("liruyi0229@outlook.com")
-            self.get_locator("//input[@id='txtPassword']").type('111111')
-            self.get_locator("//button[@id='Login']").click()
+            self.locator("#txtUserName").fill("liruyi0229@outlook.com")
+            self.locator("//input[@id='txtPassword']").type('111111')
+            self.locator("//button[@id='Login']").click()
             try:
-                self.expect(self.get_locator("css=span.red")).to_be_visible()
+                self.expect(self.locator("css=span.red")).to_be_visible()
                 assert True
             except TimeoutError as e:
                 assert False
@@ -42,7 +42,7 @@ class main_page_element(SyncPlayWrightWrapper):
      # 进入商品详情并添加购物车
     def add_cart(self):
         self.expect(self.get_locator("css=div.resultpro"))
-        self.get_locator("css=div.resultpro img").nth(2).click()
+        self.locator("css=div.resultpro img").nth(2).click()
         # 切换到最新页面
         self.page = self.get_all_pages()[-1]
         print("current page is:", self.page)

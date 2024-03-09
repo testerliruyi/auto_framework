@@ -1,4 +1,4 @@
-from playwright.sync_api import sync_playwright, expect
+from playwright.sync_api import sync_playwright, expect, Route
 from typing import Union, Optional, Literal
 from config.setting import ConfigInfo
 import os
@@ -10,6 +10,7 @@ class SyncPlayWrightWrapper:
         self.browser_type = browser_type
         self.browser = None
         self.expect = expect
+        self.Route = Route
         # 设置全局expect超时时间为30sec
         self.expect.set_options(timeout=100000)
         if param is None:
@@ -33,6 +34,8 @@ class SyncPlayWrightWrapper:
         elif self.browser_type == "webkit":
             self.browser = self.playWright.webkit.launch(headless=False, timeout=100000, args=['--start-maximized'])
         self.context = self.browser.new_context(no_viewport=True)
+        # 使用tracing api追踪
+        self.context.tracing.start(screenshots=True, snapshots=True, sources=True)
         self.page = self.context.new_page()
         return self.page
 
@@ -42,6 +45,8 @@ class SyncPlayWrightWrapper:
             self.browser = self.playWright.chromium.connect_over_cdp("http://localhost:9222")
 
         self.context = self.browser.contexts[0]
+        # 使用tracing api追踪
+        self.context.tracing.start(screenshots=True, snapshots=True, sources=True)
         self.page = self.context.pages[0]
         return self.page
 
@@ -152,6 +157,12 @@ class SyncPlayWrightWrapper:
         else:
             path = os.path.join(ConfigInfo.SAVE_TEST_RESULT_PATH, file_name)
             self.page.screenshot(path=path, full_page=True)
+
+    # tracing 功能设置
+    def save_tracing_record(self, filename: str):
+        save_path = os.path.join(ConfigInfo.BASE_DIR, 'test_manage/test_result')
+        save_file_path = os.path.join(save_path, filename)
+        self.context.tracing.stop(path=save_file_path)
 
 
 if __name__ == "__main__":

@@ -42,8 +42,6 @@ class ConfigInfo:
 
     # 测试结果保存路径
     SAVE_TEST_RESULT_PATH = os.path.join(BASE_DIR, "test_report")
-    # 视频存放路径
-    videoPath = r"E:\视频目录\YYW.AI-2.28"
 
     # 循环次数
     loop_count = 5
@@ -56,6 +54,9 @@ class ConfigInfo:
 
     # ffmpeg 安装地址
     ffmpeg_DIR = r"D:\ffmpeg-6.1.1\bin"
+
+    # 视频存放路径
+    videoPath = r"E:\视频目录\YYW.AI-3.8"
 
 
 if __name__ == "__main__":

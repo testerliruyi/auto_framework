@@ -1,4 +1,8 @@
-import time
+import sys, os
+
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+sys.path.append(base_dir)
+
 import pytest
 from common.file_handle.content_handle import content_handle
 from src.page_object.DY.new_mainpage import main_page_element
@@ -16,8 +20,8 @@ class TestDyVideoPublic:
         pageObj.click_btn_and_inputVideoPath(info['path'])
         pageObj.input_video_info(info)
         pageObj.click_public_button()
+        pageObj.save_tracing_record("dy_upload.zip")
 
 
-
-
-
+if __name__ == "__main__":
+    pytest.main(["test_new_dy_upload.py", "--tracing", 'on'])

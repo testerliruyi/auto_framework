@@ -129,6 +129,14 @@ class ReadFile:
 
 
 if __name__ == "__main__":
-    from config.setting import ConfigInfo
-    aa = ReadFile.read_yaml_file(ConfigInfo.ENV_CONFIG_FILE, "test")
-    print(aa)
+    # from config.setting import ConfigInfo
+    # aa = ReadFile.read_yaml_file(ConfigInfo.ENV_CONFIG_FILE, "test")
+    path_txt = r"D:\url.txt"
+    content = ReadFile.read_txt_file(path_txt)
+    res = []
+    for i in content:
+        link = i.strip("\n")
+        value = link.split('/')[-1].split('.')[0]
+        if value:
+            res.append(int(value))
+    print(res)

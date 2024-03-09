@@ -20,6 +20,8 @@ class TestTxUploadVideo:
         page.declare_click()
         # 发布视频
         page.public_video()
+        # 记录追踪
+        page.save_tracing_record("TX_channel.zip")
 
     def teardown_class(self):
         page.logout()

@@ -21,3 +21,5 @@ class TestXhsUploadVideo:
         page.click_upload(info)
         # 填写视频信息并发布
         page.upload_video(info)
+        #
+        page.save_tracing_record("xhs_trace.zip")

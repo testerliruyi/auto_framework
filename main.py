@@ -38,4 +38,6 @@ async def root():
 if __name__ == '__main__':
     # 自动生成py测试案例执行脚本
     # TestCaseAutomaticGeneration().get_case_automatic()
-    uvicorn.run(app="main:app", host='127.0.0.1', port=8001, reload=True, log_level="debug")
+    # uvicorn.run(app="main:app", host='127.0.0.1', port=8001, reload=True, log_level="debug")
+    import sys
+    print(sys.path)
