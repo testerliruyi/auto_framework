@@ -56,7 +56,7 @@ class ConfigInfo:
     ffmpeg_DIR = r"D:\ffmpeg-6.1.1\bin"
 
     # 视频存放路径
-    videoPath = r"E:\视频目录\YYW.AI-3.8"
+    videoPath = r"E:\视频目录\3.14-YYW.AI"
 
 
 if __name__ == "__main__":

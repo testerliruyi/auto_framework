@@ -58,7 +58,6 @@ async def create_request(item: Item):
     # 使用参数进行请求并进行断言操作
     assert_result = request_func.api_assert(response_result)
     final_dict = {"response": response_result, "assert_result": assert_result}
-    # file_logger_obj().info("案例执行", json.dumps(final_dict))
     return final_dict
 
 

@@ -33,9 +33,17 @@ class Playwright_func(SyncPlayWrightWrapper):
         self.page.goto("https://example.com")
 
     def filter_img(self):
-        self.page.on("request", lambda request: print(f"Request_url:{request.url}"))
-        self.page.on("response", lambda response: print(f"Response_status:{response.status}, response url:{response.url}"))
+        async def log_console(response):
+            if response.status == 404:
+                print(">>>>>404状态")
+                print(f"Response_status:{response.status}, response url:{response.url}")
+            # if response.status == 200:
+            #     print(f"Response_status:{response.status}, response url:{response.url}")
+
+        self.page.on("response", lambda response: log_console(response))
         self.page.goto("https://www.gets.com/", wait_until="load", timeout=100000)
+
+
 #
 # from playwright.sync_api import sync_playwright
 #
